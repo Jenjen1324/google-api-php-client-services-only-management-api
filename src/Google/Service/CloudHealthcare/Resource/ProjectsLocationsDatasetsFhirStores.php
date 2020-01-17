@@ -43,6 +43,27 @@ class Google_Service_CloudHealthcare_Resource_ProjectsLocationsDatasetsFhirStore
     return $this->call('create', array($params), "Google_Service_CloudHealthcare_FhirStore");
   }
   /**
+   * Creates a new FHIR store containing de-identified data from the source store.
+   * The metadata field type is OperationMetadata. If the request is successful,
+   * the response field type is DeidentifyFhirStoreSummary. If errors occur, error
+   * details field type is DeidentifyErrorDetails. Errors are also logged to
+   * Stackdriver (see [Viewing logs](/healthcare/docs/how-tos/stackdriver-
+   * logging)). (fhirStores.deidentify)
+   *
+   * @param string $sourceStore Source FHIR store resource name. For example, `pro
+   * jects/{project_id}/locations/{location_id}/datasets/{dataset_id}/fhirStores/{
+   * fhir_store_id}`.
+   * @param Google_Service_CloudHealthcare_DeidentifyFhirStoreRequest $postBody
+   * @param array $optParams Optional parameters.
+   * @return Google_Service_CloudHealthcare_Operation
+   */
+  public function deidentify($sourceStore, Google_Service_CloudHealthcare_DeidentifyFhirStoreRequest $postBody, $optParams = array())
+  {
+    $params = array('sourceStore' => $sourceStore, 'postBody' => $postBody);
+    $params = array_merge($params, $optParams);
+    return $this->call('deidentify', array($params), "Google_Service_CloudHealthcare_Operation");
+  }
+  /**
    * Deletes the specified FHIR store and removes all resources within it.
    * (fhirStores.delete)
    *
@@ -104,8 +125,14 @@ class Google_Service_CloudHealthcare_Resource_ProjectsLocationsDatasetsFhirStore
    * @param array $optParams Optional parameters.
    *
    * @opt_param int options.requestedPolicyVersion Optional. The policy format
-   * version to be returned. Acceptable values are 0, 1, and 3. If the value is 0,
-   * or the field is omitted, policy format version 1 will be returned.
+   * version to be returned.
+   *
+   * Valid values are 0, 1, and 3. Requests specifying an invalid value will be
+   * rejected.
+   *
+   * Requests for policies with any conditional bindings must specify version 3.
+   * Policies without any conditional bindings may specify any valid value or
+   * leave the field unset.
    * @return Google_Service_CloudHealthcare_Policy
    */
   public function getIamPolicy($resource, $optParams = array())
@@ -156,7 +183,7 @@ class Google_Service_CloudHealthcare_Resource_ProjectsLocationsDatasetsFhirStore
    * The location and format of the input data is specified by the parameters
    * below. Note that if no format is specified, this method assumes the `BUNDLE`
    * format. When using the `BUNDLE` format this method ignores the `Bundle.type`
-   * field, except for the special case of `history`, and does not apply any of
+   * field, except that `history` bundles are rejected, and does not apply any of
    * the bundle processing semantics for batch or transaction bundles. Unlike in
    * ExecuteBundle, transaction bundles are not executed as a single transaction
    * and bundle-internal references are not rewritten. The bundle is treated as a
@@ -164,15 +191,6 @@ class Google_Service_CloudHealthcare_Resource_ProjectsLocationsDatasetsFhirStore
    * ignoring `Bundle.entry.request`. As an example, this allows the import of
    * `searchset` bundles produced by a FHIR search or Patient-everything
    * operation.
-   *
-   * If history imports are enabled by setting enable_history_import in the FHIR
-   * store's configuration, this method can import historical versions of a
-   * resource by supplying a bundle of type `history` and using the `BUNDLE`
-   * format. The historical versions in the bundle must have `lastUpdated`
-   * timestamps, and the resulting resource history on the server will appear as
-   * if the versions had been created at those timestamps. If a current or
-   * historical version with the supplied resource ID already exists, the bundle
-   * is rejected to avoid creating an inconsistent sequence of resource versions.
    *
    * This method returns an Operation that can be used to track the status of the
    * import by calling GetOperation.
@@ -240,7 +258,10 @@ class Google_Service_CloudHealthcare_Resource_ProjectsLocationsDatasetsFhirStore
   }
   /**
    * Sets the access control policy on the specified resource. Replaces any
-   * existing policy. (fhirStores.setIamPolicy)
+   * existing policy.
+   *
+   * Can return Public Errors: NOT_FOUND, INVALID_ARGUMENT and PERMISSION_DENIED
+   * (fhirStores.setIamPolicy)
    *
    * @param string $resource REQUIRED: The resource for which the policy is being
    * specified. See the operation documentation for the appropriate value for this

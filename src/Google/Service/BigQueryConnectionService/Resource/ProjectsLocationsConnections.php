@@ -28,13 +28,13 @@ class Google_Service_BigQueryConnectionService_Resource_ProjectsLocationsConnect
   /**
    * Creates a new connection. (connections.create)
    *
-   * @param string $parent Parent resource name. Must be in the format
+   * @param string $parent Required. Parent resource name. Must be in the format
    * `projects/{project_id}/locations/{location_id}`
    * @param Google_Service_BigQueryConnectionService_Connection $postBody
    * @param array $optParams Optional parameters.
    *
-   * @opt_param string connectionId Optional connection id that should be assigned
-   * to the created connection.
+   * @opt_param string connectionId Optional. Connection id that should be
+   * assigned to the created connection.
    * @return Google_Service_BigQueryConnectionService_Connection
    */
   public function create($parent, Google_Service_BigQueryConnectionService_Connection $postBody, $optParams = array())
@@ -46,7 +46,7 @@ class Google_Service_BigQueryConnectionService_Resource_ProjectsLocationsConnect
   /**
    * Deletes connection and associated credential. (connections.delete)
    *
-   * @param string $name Name of the deleted connection, for example:
+   * @param string $name Required. Name of the deleted connection, for example:
    * `projects/{project_id}/locations/{location_id}/connections/{connection_id}`
    * @param array $optParams Optional parameters.
    * @return Google_Service_BigQueryConnectionService_BigqueryconnectionEmpty
@@ -60,7 +60,7 @@ class Google_Service_BigQueryConnectionService_Resource_ProjectsLocationsConnect
   /**
    * Returns specified connection. (connections.get)
    *
-   * @param string $name Name of the requested connection, for example:
+   * @param string $name Required. Name of the requested connection, for example:
    * `projects/{project_id}/locations/{location_id}/connections/{connection_id}`
    * @param array $optParams Optional parameters.
    * @return Google_Service_BigQueryConnectionService_Connection
@@ -92,12 +92,12 @@ class Google_Service_BigQueryConnectionService_Resource_ProjectsLocationsConnect
    * Returns a list of connections in the given project.
    * (connections.listProjectsLocationsConnections)
    *
-   * @param string $parent Parent resource name. Must be in the form:
+   * @param string $parent Required. Parent resource name. Must be in the form:
    * `projects/{project_id}/locations/{location_id}`
    * @param array $optParams Optional parameters.
    *
+   * @opt_param string maxResults Required. Maximum number of results per page.
    * @opt_param string pageToken Page token.
-   * @opt_param string maxResults Maximum number of results to return.
    * @return Google_Service_BigQueryConnectionService_ListConnectionsResponse
    */
   public function listProjectsLocationsConnections($parent, $optParams = array())
@@ -111,13 +111,13 @@ class Google_Service_BigQueryConnectionService_Resource_ProjectsLocationsConnect
    * credential if connection properties are in the update field mask.
    * (connections.patch)
    *
-   * @param string $name Name of the connection to update, for example:
+   * @param string $name Required. Name of the connection to update, for example:
    * `projects/{project_id}/locations/{location_id}/connections/{connection_id}`
    * @param Google_Service_BigQueryConnectionService_Connection $postBody
    * @param array $optParams Optional parameters.
    *
-   * @opt_param string updateMask Update mask for the connection fields to be
-   * updated.
+   * @opt_param string updateMask Required. Update mask for the connection fields
+   * to be updated.
    * @return Google_Service_BigQueryConnectionService_Connection
    */
   public function patch($name, Google_Service_BigQueryConnectionService_Connection $postBody, $optParams = array())
@@ -128,7 +128,10 @@ class Google_Service_BigQueryConnectionService_Resource_ProjectsLocationsConnect
   }
   /**
    * Sets the access control policy on the specified resource. Replaces any
-   * existing policy. (connections.setIamPolicy)
+   * existing policy.
+   *
+   * Can return Public Errors: NOT_FOUND, INVALID_ARGUMENT and PERMISSION_DENIED
+   * (connections.setIamPolicy)
    *
    * @param string $resource REQUIRED: The resource for which the policy is being
    * specified. See the operation documentation for the appropriate value for this
@@ -169,8 +172,8 @@ class Google_Service_BigQueryConnectionService_Resource_ProjectsLocationsConnect
    * Sets the credential for the specified connection.
    * (connections.updateCredential)
    *
-   * @param string $name Name of the connection, for example: `projects/{project_i
-   * d}/locations/{location_id}/connections/{connection_id}/credential`
+   * @param string $name Required. Name of the connection, for example: `projects/
+   * {project_id}/locations/{location_id}/connections/{connection_id}/credential`
    * @param Google_Service_BigQueryConnectionService_ConnectionCredential $postBody
    * @param array $optParams Optional parameters.
    * @return Google_Service_BigQueryConnectionService_BigqueryconnectionEmpty

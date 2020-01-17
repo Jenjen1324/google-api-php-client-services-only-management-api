@@ -19,12 +19,12 @@ class Google_Service_CloudHealthcare_FhirStore extends Google_Model
 {
   public $disableReferentialIntegrity;
   public $disableResourceVersioning;
-  public $enableHistoryImport;
   public $enableUpdateCreate;
   public $labels;
   public $name;
   protected $notificationConfigType = 'Google_Service_CloudHealthcare_NotificationConfig';
   protected $notificationConfigDataType = '';
+  public $version;
 
   public function setDisableReferentialIntegrity($disableReferentialIntegrity)
   {
@@ -41,14 +41,6 @@ class Google_Service_CloudHealthcare_FhirStore extends Google_Model
   public function getDisableResourceVersioning()
   {
     return $this->disableResourceVersioning;
-  }
-  public function setEnableHistoryImport($enableHistoryImport)
-  {
-    $this->enableHistoryImport = $enableHistoryImport;
-  }
-  public function getEnableHistoryImport()
-  {
-    return $this->enableHistoryImport;
   }
   public function setEnableUpdateCreate($enableUpdateCreate)
   {
@@ -87,5 +79,13 @@ class Google_Service_CloudHealthcare_FhirStore extends Google_Model
   public function getNotificationConfig()
   {
     return $this->notificationConfig;
+  }
+  public function setVersion($version)
+  {
+    $this->version = $version;
+  }
+  public function getVersion()
+  {
+    return $this->version;
   }
 }

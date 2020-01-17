@@ -20,11 +20,15 @@ class Google_Service_Logging_LogSink extends Google_Model
   protected $bigqueryOptionsType = 'Google_Service_Logging_BigQueryOptions';
   protected $bigqueryOptionsDataType = '';
   public $createTime;
+  public $description;
   public $destination;
+  public $disabled;
+  public $endTime;
   public $filter;
   public $includeChildren;
   public $name;
   public $outputVersionFormat;
+  public $startTime;
   public $updateTime;
   public $writerIdentity;
 
@@ -50,6 +54,14 @@ class Google_Service_Logging_LogSink extends Google_Model
   {
     return $this->createTime;
   }
+  public function setDescription($description)
+  {
+    $this->description = $description;
+  }
+  public function getDescription()
+  {
+    return $this->description;
+  }
   public function setDestination($destination)
   {
     $this->destination = $destination;
@@ -57,6 +69,22 @@ class Google_Service_Logging_LogSink extends Google_Model
   public function getDestination()
   {
     return $this->destination;
+  }
+  public function setDisabled($disabled)
+  {
+    $this->disabled = $disabled;
+  }
+  public function getDisabled()
+  {
+    return $this->disabled;
+  }
+  public function setEndTime($endTime)
+  {
+    $this->endTime = $endTime;
+  }
+  public function getEndTime()
+  {
+    return $this->endTime;
   }
   public function setFilter($filter)
   {
@@ -89,6 +117,14 @@ class Google_Service_Logging_LogSink extends Google_Model
   public function getOutputVersionFormat()
   {
     return $this->outputVersionFormat;
+  }
+  public function setStartTime($startTime)
+  {
+    $this->startTime = $startTime;
+  }
+  public function getStartTime()
+  {
+    return $this->startTime;
   }
   public function setUpdateTime($updateTime)
   {
